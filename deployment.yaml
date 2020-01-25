@@ -30,7 +30,10 @@ spec:
       imagePullSecrets:
         - name: pipeline-docker-registry
       containers:
-        - name: maven
+        - env:
+          - name: APP_BUILD_ID
+            value: ${CICD_EXECUTION_SEQUENCE}
+        - name: shcba-test
           image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
           ports:
             - containerPort: 8080
